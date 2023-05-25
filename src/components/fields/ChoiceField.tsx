@@ -5,38 +5,53 @@ import { FieldProps, FieldDefaultProps } from '../../types'
 import { classNames } from '../../utils'
 
 interface ChoiceFieldProps extends FieldProps {
-  choices: string[];
+  choices: string[]
 }
 
 function ChoiceField({
-  name, initialValue, choices, onChange,
+  name,
+  initialValue,
+  fieldId,
+  choices,
+  onChange
 }: ChoiceFieldProps) {
   const [value, setValue] = useState(initialValue)
 
   return (
     <div className="grid grid-cols-4 items-stretch gap-5">
-      { choices.map((choice) => (
+      {choices.map((choice) => (
         <button
           type="button"
           name={name}
           key={nanoid()}
+          data-field-id={fieldId}
           className={classNames(
             'inline-block rounded-lg border-2 bg-white p-5 text-center font-semibold text-gray-800 transition-colors',
-            choice === value ? 'border-primary-600 bg-primary-50' : 'border-gray-300',
+            choice === value
+              ? 'border-primary-600 bg-primary-50'
+              : 'border-gray-300'
           )}
           onClick={() => {
             if (value === choice) {
               setValue('')
-              onChange({ target: { name, value: '' } } as React.ChangeEvent<HTMLInputElement>)
+              onChange({
+                target: { name, value: '' }
+              } as React.ChangeEvent<HTMLInputElement>)
             } else {
               setValue(choice)
-              onChange({ target: { name, value: choice } } as React.ChangeEvent<HTMLInputElement>)
+              onChange({
+                target: {
+                  name,
+                  value: choice,
+                  dataset: { fieldId: fieldId.toString() }
+                }
+              } as unknown as React.ChangeEvent<HTMLInputElement>)
             }
           }}
         >
-          { choice }
+          {choice}
         </button>
-      )) }
+      ))}
     </div>
   )
 }

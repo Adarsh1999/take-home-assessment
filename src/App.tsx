@@ -8,9 +8,11 @@ import { toTitleCase } from './utils'
 import { Question as QuestionType } from './types'
 import useDebounceEffect from './hooks/useDebounceEffect'
 
+type DataT = Record<string, Record<string, string>>
+
 function App() {
   const [index, setIndex] = useState(0)
-  const [data, setData] = useState({})
+  const [data, setData] = useState<DataT>({})
   const [status, setStatus] = useState({ state: '', lastSaved: new Date() })
   const [modal, setModal] = useState<string | null>(null)
 
@@ -52,7 +54,11 @@ function App() {
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setData({ ...data, [e.target.name]: e.target.value })
+    const { value, name, dataset } = e.target
+    const fieldId = dataset?.fieldId
+    if (!fieldId) throw Error('field id not found in input handler')
+    const filedName = name
+    setData({ ...data, [filedName]: { ...data[filedName], [fieldId]: value } })
   }
 
   const question: QuestionType = questions[index]
