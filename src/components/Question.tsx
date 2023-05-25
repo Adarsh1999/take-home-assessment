@@ -5,6 +5,7 @@ import TextField from './fields/TextField'
 import ChoiceField from './fields/ChoiceField'
 import { QuestionProps } from '../types'
 import BooleanField from './fields/BooleanField'
+import PercentField from './fields/PercentField'
 
 function Question({ question, onChange }: QuestionProps) {
   const renderField = (field: string | string[], index: number) => {
@@ -41,6 +42,15 @@ function Question({ question, onChange }: QuestionProps) {
       case 'boolean':
         return (
           <BooleanField
+            name={question.id.toString()}
+            onChange={onChange}
+            key={index}
+            fieldId={index}
+          />
+        )
+      case 'percentage':
+        return (
+          <PercentField
             name={question.id.toString()}
             onChange={onChange}
             key={index}

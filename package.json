@@ -2,6 +2,7 @@
   "name": "question-sequence-poc",
   "private": true,
   "version": "0.0.0",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -10,9 +11,11 @@
     "lint": "eslint src/**/*.{ts,tsx}"
   },
   "dependencies": {
+    "formik": "^2.2.9",
     "nanoid": "^4.0.0",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@testing-library/dom": "^8.19.0",
