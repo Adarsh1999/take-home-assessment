@@ -21,8 +21,6 @@ function PercentField({ name, initialValue, fieldId, onChange }: FieldProps) {
     }
   })
 
-  console.log(formik.errors, 'eerors', formik, formik.values, 'name ', name)
-
   return (
     <form onSubmit={formik.handleSubmit}>
       <input
