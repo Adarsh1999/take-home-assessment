@@ -1,6 +1,6 @@
 interface ProgressBarProps {
-  current: number;
-  max: number;
+  current: number
+  max: number
 }
 
 function ProgressBar({ current, max }: ProgressBarProps) {
@@ -9,7 +9,13 @@ function ProgressBar({ current, max }: ProgressBarProps) {
 
   return (
     <div className="absolute inset-x-0 top-0 h-3">
-      <div className="h-full bg-primary-600" style={{ width: valueAsPercentage }} />
+      <div
+        className="h-full bg-primary-600"
+        style={{
+          width: valueAsPercentage,
+          transition: 'width 0.5s ease-in-out'
+        }}
+      />
     </div>
   )
 }
