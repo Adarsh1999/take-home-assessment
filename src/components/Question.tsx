@@ -17,7 +17,7 @@ function Question({ question, onChange }: QuestionProps) {
             name={question.id.toString()}
             onChange={onChange}
             key={index}
-            fieldId={index}
+            fieldId={question.fields_id[index]}
           />
         )
       case 'number':
@@ -26,7 +26,7 @@ function Question({ question, onChange }: QuestionProps) {
             name={question.id.toString()}
             onChange={onChange}
             key={index}
-            fieldId={index}
+            fieldId={question.fields_id[index]}
           />
         )
       case 'boolean':
@@ -35,7 +35,7 @@ function Question({ question, onChange }: QuestionProps) {
             name={question.id.toString()}
             onChange={onChange}
             key={index}
-            fieldId={index}
+            fieldId={question.fields_id[index]}
           />
         )
 
@@ -46,7 +46,7 @@ function Question({ question, onChange }: QuestionProps) {
             name={question.id.toString()}
             onChange={onChange}
             key={index}
-            fieldId={index}
+            fieldId={question.fields_id[index]}
           />
         )
       default:
@@ -56,13 +56,12 @@ function Question({ question, onChange }: QuestionProps) {
   const renderOptions = (field: string[], index: number) => {
     if (Array.isArray(field)) {
       // when field is array, its multiple choices
-      console.log("this is field", field);
       return (
         <ChoiceField
           name={question.id.toString()}
           onChange={onChange}
           options={field as string[]}
-          fieldId={index}
+          fieldId={question.fields_id[index]}
         />
       )
     }
@@ -70,7 +69,7 @@ function Question({ question, onChange }: QuestionProps) {
   }
 
   return (
-    <div className="max-w-3xl">
+    <div className="max-w-3xl mx-auto px-4">
       <h2 className="mb-10 text-3xl font-bold">{question.title}</h2>
       {question.fields.map((field, idx) => renderField(field, idx))}
       {renderOptions(question.options || [], 1)}
@@ -88,7 +87,8 @@ function Question({ question, onChange }: QuestionProps) {
         </>
       )}
     </div>
-  )
+  );
+  
 }
 
 export default Question

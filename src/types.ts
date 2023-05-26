@@ -8,6 +8,7 @@ export type Question = {
   title: string
   description: string
   fields: FieldT[]
+  fields_id:number[]
   modals?: {
     [key: string]: string
   }

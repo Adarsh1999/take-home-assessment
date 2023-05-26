@@ -36,9 +36,6 @@ function App() {
 
 
 
-
-console.log("this is newquestions", newquestions);
-
   const hideModal = () => {
     document.body.style.overflow = 'auto'
     setModal(null)
@@ -49,30 +46,23 @@ console.log("this is newquestions", newquestions);
     setModal(newModal)
   }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await api.get('/questions/get');
-        
-        setNewQuestions(response.data);
-        
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, []); 
 
   
 
   const save = async () => {
     if (Object.keys(data).length > 0) {
       setStatus({ ...status, state: 'working' })
+      
+      const questionId = newquestions[index].id;
+      console.log("this is dat aaaaaaaaaaa", Object.keys(data[questionId]));
       try {
-        const response = await api.post('/answer/save',data);
+        // const response = await api.post('/answer/save',{
+        //   "answer": data[questionId],
+        //   "questionId": newquestions[index].id,
+        //   "fieldId": Object.keys(data[questionId])
+        // });
         setStatus({ state: 'saved', lastSaved: new Date() })
         
-        setNewQuestions(response.data);
         
       } catch (error) {
         console.error(error);
@@ -106,6 +96,7 @@ console.log("this is newquestions", newquestions);
     const fieldId = dataset?.fieldId
     if (!fieldId) throw Error('field id not found in input handler')
     const filedName = name
+    console.log("this is filedName", filedName); //question id
     setData({ ...data, [filedName]: { ...data[filedName], [fieldId]: value } })
   }
 

@@ -16,7 +16,6 @@ function ChoiceField({
   onChange
 }: ChoiceFieldProps) {
   const [value, setValue] = useState(initialValue)
-  console.log("this is options", options);
   return (
     <div className="grid grid-cols-4 items-stretch gap-5">
       {options?.map((option) => (

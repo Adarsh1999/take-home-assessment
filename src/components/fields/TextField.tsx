@@ -20,6 +20,7 @@ function TextField({ name, initialValue, fieldId, onChange }: TextFieldProps) {
       value={value}
       onChange={handleChange}
       data-field-id={fieldId}
+      placeholder="Enter a text value"
     />
   )
 }

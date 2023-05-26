@@ -17,7 +17,6 @@ function PercentField({ name, initialValue, fieldId, onChange }: FieldProps) {
     },
     validationSchema,
     onSubmit: (values) => {
-      console.log(values)
     }
   })
 
@@ -33,6 +32,8 @@ function PercentField({ name, initialValue, fieldId, onChange }: FieldProps) {
           onChange(e)
         }}
         onBlur={formik.handleBlur}
+        placeholder="Enter a percentage value between 0 and 100"
+
       />
       {formik.touched[name] && formik.errors[name] ? (
         <div>{formik.errors[name]}</div>
