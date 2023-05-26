@@ -17,7 +17,6 @@ function App() {
   const [status, setStatus] = useState({ state: '', lastSaved: new Date() })
   const [modal, setModal] = useState<string | null>(null)
   const [newquestions, setNewQuestions] = useState<QuestionType[]>(questions);
-  const [prevData, setPrevData] = useState<DataT>({});
 
   
   useEffect(() => {
@@ -52,39 +51,30 @@ function App() {
 
   const save = async () => {
     if (Object.keys(data).length > 0) {
-      setStatus({ ...status, state: 'working' });
+      setStatus({ ...status, state: 'working' })
       
       const questionId = newquestions[index].id;
-      
-      const updatedFields = Object.keys(data[questionId]).filter((fieldId) => {
-        // Check if the field has changed by comparing with the previous state
-        return data[questionId][fieldId] !== prevData[questionId]?.[fieldId];
+      console.log("this is dat aaaaaaaaaaa", {
+
+        "answer": data[questionId],
+        "questionId": newquestions[index].id,
+        "fieldId": Object.keys(data[questionId])
       });
-      
-      const updatedData = {
-        answer: updatedFields.reduce((obj: Record<string, string>, fieldId: string) => {
-          obj[fieldId] = data[questionId][fieldId];
-          return obj;
-        }, {}),
-        questionId: newquestions[index].id,
-        fieldId: updatedFields.join(','),
-      };
-      
-      
       try {
-        console.log("this is updated data",updatedData);
-        // const response = await api.post('/answer/save', updatedData);
-        setStatus({ state: 'saved', lastSaved: new Date() });
+        // const response = await api.post('/answer/save',{
+        //   "answer": data[questionId],
+        //   "questionId": newquestions[index].id,
+        //   "fieldId": Object.keys(data[questionId])
+        // });
+        setStatus({ state: 'saved', lastSaved: new Date() })
         
-        // Update the previous data with the current state
-        setPrevData(data);
         
-        // Handle the response as needed
       } catch (error) {
         console.error(error);
       }
+      
     }
-  };
+  }
 
   useDebounceEffect(save, [data], 1000)
   
@@ -105,69 +95,57 @@ function App() {
         return null
     }
   }
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, name, dataset } = e.target;
-    const fieldId = dataset?.fieldId;
-    if (!fieldId) throw Error('field id not found in input handler');
-    const fieldName = name;
-    
-    setData((prevData) => {
-      // Update only the changed field
-      const updatedField = { ...prevData[fieldName], [fieldId]: value };
-      
-      // Update the data object with the changed field
-      const updatedData = { ...prevData, [fieldName]: updatedField };
-      
-      // Save the updated data as the current state
-      setPrevData(updatedData);
-      
-      return updatedData;
-    });
-    
-  };
+    const { value, name, dataset } = e.target
+    const fieldId = dataset?.fieldId
+    if (!fieldId) throw Error('field id not found in input handler')
+    const filedName = name
+    setData({ ...data, [filedName]: { ...data[filedName], [fieldId]: value } })
+  }
 
 const question: QuestionType = newquestions[index]; 
 
 return (
   <>
     <div className="m-10 mx-auto max-w-5xl space-y-5">
-      <div className="relative flex h-[500px] flex-col overflow-hidden rounded-lg bg-gray-100 p-7 pt-20">
-        <ProgressBar current={index + 1} max={newquestions.length} />
-        <Question question={newquestions[index]} onChange={handleChange} />
-        <div className="flex-1" />
-        <div className="flex items-center space-x-5">
-          <Button
-            onClick={() => {
-              setIndex(index - 1);
-            }}
-            disabled={index < 1}
-          >
-            &larr; Back
-          </Button>
-          {newquestions[index].modals && (
-            <Button
-              variant="outline"
-              onClick={() => showModal('description')}
-            >
-              Modal
-            </Button>
-          )}
-          <span className="flex-1 text-right">{renderStatus()}</span>
-          <Button>Save and Exit</Button>
-          <Button
-            onClick={() => {
-              setIndex(index + 1);
-            }}
-            disabled={index >= newquestions.length - 1}
-          >
-            Next &rarr;
-          </Button>
-        </div>
-      </div>
+  <div className="relative flex h-[500px] flex-col overflow-hidden rounded-lg bg-gray-100 p-7 pt-20">
+    <ProgressBar current={index + 1} max={newquestions.length} />
+    <Question question={newquestions[index]} onChange={handleChange} />
+    <div className="flex-1" />
+    <div className="flex items-center space-x-5">
+      <Button
+        onClick={() => {
+          setIndex(index - 1);
+        }}
+        disabled={index < 1}
+      >
+        &larr; Back
+      </Button>
+      {newquestions[index].modals && (
+        <Button
+          variant="outline"
+          onClick={() => showModal('description')}
+        >
+          Modal
+        </Button>
+      )}
+      <span className="flex-1 text-right">{renderStatus()}</span>
+      <Button>Save and Exit</Button>
+      <Button
+        onClick={() => {
+          setIndex(index + 1);
+        }}
+        disabled={index >= newquestions.length - 1}
+      >
+        Next &rarr;
+      </Button>
     </div>
+  </div>
+</div>
 
 {modal && question && question.modals && modal in question.modals && (
-  <div className="fixed inset-0 z-10 grid place-content-center">
+  <div className="fixed inset-0 z-10 flex items-center justify-center">
     <div className="z-20 mx-auto max-w-xl space-y-5 rounded-lg border border-gray-300 bg-white p-6">
       <h1 className="text-xl font-bold text-gray-800">
         {toTitleCase(modal)}
@@ -176,12 +154,12 @@ return (
       <Button onClick={hideModal}>Done</Button>
     </div>
     <div
-      className="absolute inset-0 bg-black opacity-60"
+      className="absolute inset-0 bg-black opacity-60 cursor-pointer"
       onClick={hideModal}
-      role="none"
     />
   </div>
 )}
+
 
 
 

@@ -17,7 +17,7 @@ function ChoiceField({
 }: ChoiceFieldProps) {
   const [value, setValue] = useState(initialValue)
   return (
-    <div className="grid grid-cols-4 items-stretch gap-5">
+    <div className="grid grid-cols-4 items-stretch gap-5 my-3">
       {options?.map((option) => (
 
         <button

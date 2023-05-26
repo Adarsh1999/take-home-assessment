@@ -26,7 +26,7 @@ function PercentField({ name, initialValue, fieldId, onChange }: FieldProps) {
         type="number"
         name={name}
         data-field-id={fieldId}
-        className="block w-full rounded-lg border-2 border-gray-300 py-2 px-3 focus:outline-none"
+        className="block w-full rounded-lg border-2 border-gray-300 py-2 px-3 focus:outline-none my-3" // Added 'my-3' class for vertical margin
         onChange={(e) => {
           formik.handleChange(e)
           onChange(e)

@@ -1,30 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { FieldDefaultProps, FieldProps } from '../../types';
 
-import { FieldDefaultProps, FieldProps } from '../../types'
-
-type TextFieldProps = FieldProps
+type TextFieldProps = FieldProps;
 
 function TextField({ name, initialValue, fieldId, onChange }: TextFieldProps) {
-  const [value, setValue] = useState(initialValue)
+  const [value, setValue] = useState(initialValue);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value)
-    onChange(e)
-  }
+    setValue(e.target.value);
+    onChange(e);
+  };
 
   return (
     <input
       type="text"
       name={name}
-      className="block w-full rounded-lg border-2 border-gray-300 py-2 px-3 focus:outline-none"
+      className="block w-full rounded-lg border-2 border-gray-300 py-2 px-3 focus:outline-none my-3" // Added 'my-3' class for vertical margin
       value={value}
       onChange={handleChange}
       data-field-id={fieldId}
       placeholder="Enter a text value"
     />
-  )
+  );
 }
 
-TextField.defaultProps = FieldDefaultProps
+TextField.defaultProps = FieldDefaultProps;
 
-export default TextField
+export default TextField;
