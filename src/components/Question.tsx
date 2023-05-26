@@ -9,17 +9,7 @@ import PercentField from './fields/PercentField'
 
 function Question({ question, onChange }: QuestionProps) {
   const renderField = (field: string | string[], index: number) => {
-    if (Array.isArray(field)) {
-      // when field is array, its multiple choices
-      return (
-        <ChoiceField
-          name={question.id.toString()}
-          onChange={onChange}
-          choices={field as string[]}
-          fieldId={index}
-        />
-      )
-    }
+    
     switch (field) {
       case 'text':
         return (
@@ -49,15 +39,7 @@ function Question({ question, onChange }: QuestionProps) {
           />
         )
 
-        case 'mcq':
-        return (
-          <BooleanField
-            name={question.id.toString()}
-            onChange={onChange}
-            key={index}
-            fieldId={index}
-          />
-        )
+      
       case 'percentage':
         return (
           <PercentField
@@ -71,11 +53,27 @@ function Question({ question, onChange }: QuestionProps) {
         return null
     }
   }
+  const renderOptions = (field: string[], index: number) => {
+    if (Array.isArray(field)) {
+      // when field is array, its multiple choices
+      console.log("this is field", field);
+      return (
+        <ChoiceField
+          name={question.id.toString()}
+          onChange={onChange}
+          options={field as string[]}
+          fieldId={index}
+        />
+      )
+    }
+    
+  }
 
   return (
     <div className="max-w-3xl">
       <h2 className="mb-10 text-3xl font-bold">{question.title}</h2>
       {question.fields.map((field, idx) => renderField(field, idx))}
+      {renderOptions(question.options || [], 1)}
       {question.description && (
         <>
           <p className="mt-10 text-gray-600">{question.description}</p>

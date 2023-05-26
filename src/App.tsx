@@ -18,7 +18,6 @@ function App() {
   const [modal, setModal] = useState<string | null>(null)
   const [newquestions, setNewQuestions] = useState<QuestionType[]>(questions);
 
-
   
   useEffect(() => {
     const fetchData = async () => {
@@ -36,6 +35,8 @@ function App() {
 
 
 
+
+
 console.log("this is newquestions", newquestions);
 
   const hideModal = () => {
@@ -48,12 +49,35 @@ console.log("this is newquestions", newquestions);
     setModal(newModal)
   }
 
-  const save = () => {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await api.get('/questions/get');
+        
+        setNewQuestions(response.data);
+        
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []); 
+
+  
+
+  const save = async () => {
     if (Object.keys(data).length > 0) {
       setStatus({ ...status, state: 'working' })
-      setTimeout(() => {
+      try {
+        const response = await api.post('/answer/save',data);
         setStatus({ state: 'saved', lastSaved: new Date() })
-      }, 1000)
+        
+        setNewQuestions(response.data);
+        
+      } catch (error) {
+        console.error(error);
+      }
+      
     }
   }
 

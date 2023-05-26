@@ -5,21 +5,22 @@ import { FieldProps, FieldDefaultProps } from '../../types'
 import { classNames } from '../../utils'
 
 interface ChoiceFieldProps extends FieldProps {
-  choices: string[]
+  options: string[]
 }
 
 function ChoiceField({
   name,
   initialValue,
   fieldId,
-  choices,
+  options,
   onChange
 }: ChoiceFieldProps) {
   const [value, setValue] = useState(initialValue)
-
+  console.log("this is options", options);
   return (
     <div className="grid grid-cols-4 items-stretch gap-5">
-      {choices.map((choice) => (
+      {options?.map((option) => (
+
         <button
           type="button"
           name={name}
@@ -27,29 +28,29 @@ function ChoiceField({
           data-field-id={fieldId}
           className={classNames(
             'inline-block rounded-lg border-2 bg-white p-5 text-center font-semibold text-gray-800 transition-colors',
-            choice === value
+            option === value
               ? 'border-primary-600 bg-primary-50'
               : 'border-gray-300'
           )}
           onClick={() => {
-            if (value === choice) {
+            if (value === option) {
               setValue('')
               onChange({
                 target: { name, value: '' }
               } as React.ChangeEvent<HTMLInputElement>)
             } else {
-              setValue(choice)
+              setValue(option)
               onChange({
                 target: {
                   name,
-                  value: choice,
+                  value: option,
                   dataset: { fieldId: fieldId.toString() }
                 }
               } as unknown as React.ChangeEvent<HTMLInputElement>)
             }
           }}
         >
-          {choice}
+          {option}
         </button>
       ))}
     </div>

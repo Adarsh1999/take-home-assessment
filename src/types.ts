@@ -3,6 +3,7 @@ import React from 'react'
 type FieldT = string | string[]
 
 export type Question = {
+  options?: string[]
   id: number
   title: string
   description: string

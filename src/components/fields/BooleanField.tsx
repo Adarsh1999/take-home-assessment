@@ -25,7 +25,7 @@ function BooleanField({ name, initialValue, fieldId, onChange }: FieldProps) {
       name={name}
       initialValue={initialValue}
       onChange={handleChange}
-      choices={['Yes', 'No']}
+      options={['Yes', 'No']}
       fieldId={fieldId}
     />
   )
