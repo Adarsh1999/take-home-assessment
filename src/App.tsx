@@ -17,6 +17,7 @@ function App() {
   const [status, setStatus] = useState({ state: '', lastSaved: new Date() })
   const [modal, setModal] = useState<string | null>(null)
   const [newquestions, setNewQuestions] = useState<QuestionType[]>(questions);
+  const [prevData, setPrevData] = useState<DataT>({});
 
   
   useEffect(() => {
@@ -51,30 +52,39 @@ function App() {
 
   const save = async () => {
     if (Object.keys(data).length > 0) {
-      setStatus({ ...status, state: 'working' })
+      setStatus({ ...status, state: 'working' });
       
       const questionId = newquestions[index].id;
-      console.log("this is dat aaaaaaaaaaa", {
-
-        "answer": data[questionId],
-        "questionId": newquestions[index].id,
-        "fieldId": Object.keys(data[questionId])
+      
+      const updatedFields = Object.keys(data[questionId]).filter((fieldId) => {
+        // Check if the field has changed by comparing with the previous state
+        return data[questionId][fieldId] !== prevData[questionId]?.[fieldId];
       });
+      
+      const updatedData = {
+        answer: updatedFields.reduce((obj: Record<string, string>, fieldId: string) => {
+          obj[fieldId] = data[questionId][fieldId];
+          return obj;
+        }, {}),
+        questionId: newquestions[index].id,
+        fieldId: updatedFields.join(','),
+      };
+      
+      
       try {
-        // const response = await api.post('/answer/save',{
-        //   "answer": data[questionId],
-        //   "questionId": newquestions[index].id,
-        //   "fieldId": Object.keys(data[questionId])
-        // });
-        setStatus({ state: 'saved', lastSaved: new Date() })
+        console.log("this is updated data",updatedData);
+        // const response = await api.post('/answer/save', updatedData);
+        setStatus({ state: 'saved', lastSaved: new Date() });
         
+        // Update the previous data with the current state
+        setPrevData(data);
         
+        // Handle the response as needed
       } catch (error) {
         console.error(error);
       }
-      
     }
-  }
+  };
 
   useDebounceEffect(save, [data], 1000)
   
@@ -95,14 +105,26 @@ function App() {
         return null
     }
   }
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, name, dataset } = e.target
-    const fieldId = dataset?.fieldId
-    if (!fieldId) throw Error('field id not found in input handler')
-    const filedName = name
-    setData({ ...data, [filedName]: { ...data[filedName], [fieldId]: value } })
-  }
+    const { value, name, dataset } = e.target;
+    const fieldId = dataset?.fieldId;
+    if (!fieldId) throw Error('field id not found in input handler');
+    const fieldName = name;
+    
+    setData((prevData) => {
+      // Update only the changed field
+      const updatedField = { ...prevData[fieldName], [fieldId]: value };
+      
+      // Update the data object with the changed field
+      const updatedData = { ...prevData, [fieldName]: updatedField };
+      
+      // Save the updated data as the current state
+      setPrevData(updatedData);
+      
+      return updatedData;
+    });
+    
+  };
 
 const question: QuestionType = newquestions[index]; 
 
