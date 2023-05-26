@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import questions from './questions.json'
 import Button from './components/Button'
@@ -7,6 +7,7 @@ import ProgressBar from './components/ProgressBar'
 import { toTitleCase } from './utils'
 import { Question as QuestionType } from './types'
 import useDebounceEffect from './hooks/useDebounceEffect'
+import api from './api';
 
 type DataT = Record<string, Record<string, string>>
 
@@ -15,6 +16,25 @@ function App() {
   const [data, setData] = useState<DataT>({})
   const [status, setStatus] = useState({ state: '', lastSaved: new Date() })
   const [modal, setModal] = useState<string | null>(null)
+  // const [questions, setQuestions] = useState<QuestionType[]>([]); // Add this state to store the questions
+  const [newquestions, setNewQuestions] = useState<QuestionType[]>([]);
+
+
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await api.get('/questions/get');
+        
+        setNewQuestions(response.data);
+        
+      } catch (error) {
+        console.error(error);
+        // Handle error if necessary
+      }
+    };
+    fetchData();
+  }, []); 
 
   const hideModal = () => {
     document.body.style.overflow = 'auto'
@@ -36,7 +56,12 @@ function App() {
   }
 
   useDebounceEffect(save, [data], 1000)
+  
 
+  // useEffect(() => {
+  //   console.log("this is questions", questions);
+  // }, [questions]);
+  
   const renderStatus = () => {
     switch (status.state) {
       case 'saved':
