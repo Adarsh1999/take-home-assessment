@@ -54,7 +54,12 @@ function App() {
       setStatus({ ...status, state: 'working' })
       
       const questionId = newquestions[index].id;
-      console.log("this is dat aaaaaaaaaaa", Object.keys(data[questionId]));
+      console.log("this is dat aaaaaaaaaaa", {
+
+        "answer": data[questionId],
+        "questionId": newquestions[index].id,
+        "fieldId": Object.keys(data[questionId])
+      });
       try {
         // const response = await api.post('/answer/save',{
         //   "answer": data[questionId],
@@ -96,7 +101,6 @@ function App() {
     const fieldId = dataset?.fieldId
     if (!fieldId) throw Error('field id not found in input handler')
     const filedName = name
-    console.log("this is filedName", filedName); //question id
     setData({ ...data, [filedName]: { ...data[filedName], [fieldId]: value } })
   }
 
