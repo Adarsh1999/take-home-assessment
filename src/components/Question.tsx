@@ -48,6 +48,16 @@ function Question({ question, onChange }: QuestionProps) {
             fieldId={index}
           />
         )
+
+        case 'mcq':
+        return (
+          <BooleanField
+            name={question.id.toString()}
+            onChange={onChange}
+            key={index}
+            fieldId={index}
+          />
+        )
       case 'percentage':
         return (
           <PercentField
