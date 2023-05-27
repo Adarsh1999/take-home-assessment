@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import ProgressBar from '../components/ProgressBar';
+import { vi } from 'vitest';
 
 describe('ProgressBar', () => {
   it('renders the progress bar with correct width and value', () => {
@@ -12,7 +13,9 @@ describe('ProgressBar', () => {
     const progressBar = getByTestId('progress-bar-container');
     const valueText = "20%";
 
-    expect(progressBar).toHaveStyle(`width: ${valueText}`);
+    expect(progressBar).toHaveStyle({
+      width: valueText,
+    });
     expect(getByText(valueText)).toBeInTheDocument();
   });
 }); 

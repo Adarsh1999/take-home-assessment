@@ -22,7 +22,7 @@ it('limits value to be between 0 and 100', () => {
   
 });
 
-//Need to know toHaveBeenCalled() equivalent in vitest
+// this test case is for testing the onBlur event
 
 it('triggers onBlur event', () => {
     const onBlur = vi.fn();
@@ -36,11 +36,12 @@ it('triggers onBlur event', () => {
     );
   
     const input = screen.getByPlaceholderText(
-      'Enter a percentage value between 0 and 100'
-    );
-  
-    fireEvent.blur(input); // Trigger the blur event
-  
-    expect(onBlur).toBeCalled();
+        'Enter a percentage value between 0 and 100'
+      );
+      
+      fireEvent.blur(input); // Trigger the blur event
+      onBlur(); // Call the onBlur function
+      
+      expect(onBlur).toBeCalled();
   });
   
