@@ -1,14 +1,13 @@
-import React, { useState } from 'react'
-
-import { FieldDefaultProps, FieldProps } from '../../types'
+import React, { useState } from 'react';
+import { FieldDefaultProps, FieldProps } from '../../types';
 
 function NumberField({ name, initialValue, fieldId, onChange }: FieldProps) {
-  const [value, setValue] = useState(initialValue)
+  const [value, setValue] = useState(initialValue);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value)
-    onChange(e)
-  }
+    setValue(e.target.value);
+    onChange(e);
+  };
 
   return (
     <input
@@ -19,11 +18,10 @@ function NumberField({ name, initialValue, fieldId, onChange }: FieldProps) {
       value={value}
       onChange={handleChange}
       placeholder="Enter a number"
-
     />
-  )
+  );
 }
 
-NumberField.defaultProps = FieldDefaultProps
+NumberField.defaultProps = FieldDefaultProps;
 
-export default NumberField
+export default NumberField;

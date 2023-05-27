@@ -18,7 +18,7 @@ function ChoiceField({
   const [value, setValue] = useState(initialValue);
 
   return (
-    <div className="grid grid-cols-4 items-stretch gap-5 my-3">
+    <div className="grid grid-cols-1 gap-2 my-3">
       {/* Render each option as a button */}
       {options?.map((option) => (
         <button
@@ -27,7 +27,7 @@ function ChoiceField({
           key={nanoid()} // Generate a unique key for each option
           data-field-id={fieldId}
           className={classNames(
-            'inline-block rounded-lg border-2 bg-white p-5 text-center font-semibold text-gray-800 transition-colors',
+            'block rounded-lg border-2 bg-white p-3 text-center font-semibold text-gray-800 transition-colors',
             option === value
               ? 'border-primary-600 bg-primary-50' // Apply active styles if the option is selected
               : 'border-gray-300'
@@ -50,7 +50,7 @@ function ChoiceField({
             }
           }}
         >
-          {option}
+          <span className="whitespace-nowrap overflow-hidden">{option}</span>
         </button>
       ))}
     </div>

@@ -9,18 +9,18 @@ function PercentField({ name, initialValue, fieldId, onChange }: FieldProps) {
     [name]: Yup.number()
       .min(0, 'Number must be greater than or equal to 0')
       .max(100, 'Number must be less than or equal to 100')
-      .required('Number is required')
+      .required('Number is required'),
   });
 
   // Initialize formik for form management
   const formik = useFormik({
     initialValues: {
-      [name]: initialValue
+      [name]: initialValue,
     },
     validationSchema,
     onSubmit: (values) => {
       // Handle form submission if needed
-    }
+    },
   });
 
   return (

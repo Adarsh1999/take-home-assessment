@@ -1,6 +1,5 @@
-import React from 'react'
-
-import { classNames } from '../utils'
+import React from 'react';
+import { classNames } from '../utils';
 
 interface ButtonProps {
   variant?: 'primary' | 'outline';
@@ -17,9 +16,9 @@ function Button({
     primary: 'bg-primary-600 text-white border-primary-600 disabled:bg-gray-300 disabled:border-gray-300 disabled:text-gray-500',
     outline: 'border-gray-300 text-gray-500 hover:border-gray-400 hover:bg-gray-100 hover:text-gray-600',
     default: '',
-  }
+  };
 
-  variantClassNames.default = variantClassNames.primary
+  variantClassNames.default = variantClassNames.primary;
 
   return (
     <button
@@ -31,10 +30,16 @@ function Button({
       )}
       onClick={onClick}
       disabled={disabled}
+      style={{
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        maxWidth: '100%',
+      }}
     >
       { children }
     </button>
-  )
+  );
 }
 
 Button.defaultProps = {
@@ -43,6 +48,6 @@ Button.defaultProps = {
   disabled: false,
   onClick: () => { },
   children: undefined,
-}
+};
 
-export default Button
+export default Button;

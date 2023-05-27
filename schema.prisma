@@ -1,35 +1,52 @@
-datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
-}
-
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
-// ==================== EXAMPLES (DELETE BEFORE SUBMITTING) ====================
-model User {
-    id        Int      @id @default(autoincrement())
-    createdAt DateTime @default(now())
-    email     String   @unique
-    name      String?
-    role      Role     @default(USER)
-    posts     Post[]
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
-model Post {
-    id        Int      @id @default(autoincrement())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    published Boolean  @default(false)
-    title     String   @db.VarChar(255)
-    author    User?    @relation(fields: [authorId], references: [id])
-    authorId  Int?
+// model User {
+//   id        Int      @id @default(autoincrement())
+//   email     String   @unique
+//   name      String?
+//   password  String
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+//   answers   Answer[]
+// }
+
+model Question {
+  id          Int      @id
+  title       String
+  description String
+  fields      Field[]
+  modals      String?
+  answers     Answer[]
+  options     String[]
 }
 
-enum Role {
-    USER
-    ADMIN
+model Answer {
+  id         Int      @id @default(autoincrement())
+  answer     String
+  question   Question @relation(fields: [questionId], references: [id])
+  questionId Int
+  field        Field   @relation(fields: [fieldId], references: [id])
+  fieldId      Int
 }
 
-// =============================================================================
+
+model Field {
+  id   Int    @id
+  type String // field will be 5 types mcq, string, number ,percentage, boolean
+  answers      Answer[]
+  question     Question[]
+}
+
+// model Options {
+//   id Int @id
+//   option String
+//   question Question @relation(fields: [questionId], references: [id])
+//   questionId Int
+// }

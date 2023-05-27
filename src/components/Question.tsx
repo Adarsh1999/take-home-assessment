@@ -70,17 +70,17 @@ function Question({ question, onChange }: QuestionProps) {
   return (
     <div className="max-w-3xl mx-auto px-4">
       <h2 className="mb-6 text-3xl font-bold">{question.title}</h2>
-      
+
       {/* Render each field */}
       {question.fields.map((field, idx) => (
         <div key={idx} className="mb-4">
           {renderField(field, idx)}
         </div>
       ))}
-      
+
       {/* Render options for a choice field */}
       {renderOptions(question.options || [], 1)}
-      
+
       {/* Render question description and learn more link */}
       {question.description && (
         <div className="mt-8">

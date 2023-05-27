@@ -105,7 +105,7 @@ function App() {
           <ProgressBar current={index + 1} max={newQuestions.length} />
           <Question question={newQuestions[index]} onChange={handleChange} />
           <div className="flex-1 my-5"></div>
-          <div className="flex items-center justify-between space-x-4">
+          <div className="flex flex-col space-y-4 sm:flex-row sm:justify-between sm:items-center">
             <Button
               onClick={() => {
                 setIndex(index - 1);
@@ -124,23 +124,25 @@ function App() {
                 Modal
               </Button>
             )}
-            <span className="text-right flex-1">{renderStatus()}</span>
-            <div className="space-x-4">
+            <div className="text-center">{renderStatus()}</div>
+            <div className="flex flex-col sm:flex-row sm:space-x-4">
               <Button className="flex-shrink-0">Save and Exit</Button>
-              <Button
-                onClick={() => {
-                  setIndex(index + 1);
-                }}
-                disabled={index >= newQuestions.length - 1}
-                className="flex-shrink-0"
-              >
-                Next →
-              </Button>
+              <div className="mt-2 sm:mt-0">
+                <Button
+                  onClick={() => {
+                    setIndex(index + 1);
+                  }}
+                  disabled={index >= newQuestions.length - 1}
+                  className="flex-shrink-0"
+                >
+                  Next →
+                </Button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
+  
       {modal && question && question.modals && modal in question.modals && (
         <div className="fixed inset-0 z-10 flex items-center justify-center">
           <div className="z-20 mx-auto max-w-xl space-y-5 rounded-lg border border-gray-300 bg-white p-6">
@@ -157,8 +159,9 @@ function App() {
         </div>
       )}
     </>
-
   );
+  
+  
 
 
 
