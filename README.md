@@ -85,6 +85,8 @@ Implementation Overview:
 - Improved UI components like when the description was long or there were lots of element on the page the items used to get squeezed up so made the positioning of all the elements dynamic with the width of the component varying according the length of the elements
 - Added commenting and made the code structure best industrial standards
 - Added some css to make UI more cleaner for buttons, links, added multiple answer field but tried to make the UI consistent
+   
+ **NOTE**: the reason why didn't have a get answer api implemented which could get the all answers or of a particular field just because if do that currenly I don't have User authentication so all answers will be already saved when you open the webapp, so the purpose of application may get defeated but I have a get all answers and get a particular answer of a particular question and field APIs in the backend
 
 
 ## 🎯 Tasks
