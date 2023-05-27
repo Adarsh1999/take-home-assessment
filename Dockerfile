@@ -11,10 +11,12 @@ WORKDIR /app
 
 # Copy the package.json and yarn.lock files to the working directory
 COPY package.json yarn.lock ./
-COPY . .
+
 
 # Install the project dependencies
 RUN yarn install --frozen-lockfile
+
+COPY . .
 
 # Build the React project
 RUN yarn build

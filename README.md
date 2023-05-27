@@ -40,7 +40,7 @@ The `ProgressBar` component displays a progress bar with a percentage value. It 
 The `useDebounceEffect` custom hook is designed for debouncing the save functionality in App.tsx. So it allowed me to call the save Answer API when the user stopped typing and not on all the characters
 
 Implementation Overview:
-
+.
 
 1. Function Signature:
    - The `useDebounceEffect` function takes three parameters: `effect`, `deps`, and `delay`.
