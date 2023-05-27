@@ -42,7 +42,7 @@ function App() {
   }
 
   const showModal = (newModal: string) => {
-    document.body.style.overflow = 'hidden'
+    document.body.style.overflow = 'hidden' 
     setModal(newModal)
   }
 
@@ -61,11 +61,11 @@ function App() {
         "fieldId": Object.keys(data[questionId])
       });
       try {
-        // const response = await api.post('/answer/save',{
-        //   "answer": data[questionId],
-        //   "questionId": newquestions[index].id,
-        //   "fieldId": Object.keys(data[questionId])
-        // });
+        const response = await api.post('/answer/save',{
+          "answer": data[questionId],
+          "questionId": newquestions[index].id,
+          "fieldId": Object.keys(data[questionId])
+        });
         setStatus({ state: 'saved', lastSaved: new Date() })
         
         
@@ -108,61 +108,62 @@ const question: QuestionType = newquestions[index];
 
 return (
   <>
-    <div className="m-10 mx-auto max-w-5xl space-y-5">
-  <div className="relative flex h-[500px] flex-col overflow-hidden rounded-lg bg-gray-100 p-7 pt-20">
-    <ProgressBar current={index + 1} max={newquestions.length} />
-    <Question question={newquestions[index]} onChange={handleChange} />
-    <div className="flex-1" />
-    <div className="flex items-center space-x-5">
-      <Button
-        onClick={() => {
-          setIndex(index - 1);
-        }}
-        disabled={index < 1}
-      >
-        &larr; Back
-      </Button>
-      {newquestions[index].modals && (
-        <Button
-          variant="outline"
-          onClick={() => showModal('description')}
-        >
-          Modal
-        </Button>
-      )}
-      <span className="flex-1 text-right">{renderStatus()}</span>
-      <Button>Save and Exit</Button>
-      <Button
-        onClick={() => {
-          setIndex(index + 1);
-        }}
-        disabled={index >= newquestions.length - 1}
-      >
-        Next &rarr;
-      </Button>
+    <div className="m-10 mx-auto max-w-5xl">
+      <div className="relative flex flex-col overflow-hidden rounded-lg bg-gray-100 p-7 pt-20">
+        <ProgressBar current={index + 1} max={newquestions.length} />
+        <Question question={newquestions[index]} onChange={handleChange} />
+        <div className="flex-1 my-5"></div>
+        <div className="flex items-center justify-between space-x-4">
+          <Button
+            onClick={() => {
+              setIndex(index - 1);
+            }}
+            disabled={index < 1}
+            className="flex-shrink-0"
+          >
+            &larr; Back
+          </Button>
+          {newquestions[index].modals && (
+            <Button
+              variant="outline"
+              onClick={() => showModal('description')}
+              className="flex-shrink-0"
+            >
+              Modal
+            </Button>
+          )}
+          <span className="text-right flex-1">{renderStatus()}</span>
+          <div className="space-x-4">
+            <Button className="flex-shrink-0">Save and Exit</Button>
+            <Button
+              onClick={() => {
+                setIndex(index + 1);
+              }}
+              disabled={index >= newquestions.length - 1}
+              className="flex-shrink-0"
+            >
+              Next &rarr;
+            </Button>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-{modal && question && question.modals && modal in question.modals && (
-  <div className="fixed inset-0 z-10 flex items-center justify-center">
-    <div className="z-20 mx-auto max-w-xl space-y-5 rounded-lg border border-gray-300 bg-white p-6">
-      <h1 className="text-xl font-bold text-gray-800">
-        {toTitleCase(modal)}
-      </h1>
-      <p>{question.modals[modal]}</p>
-      <Button onClick={hideModal}>Done</Button>
-    </div>
-    <div
-      className="absolute inset-0 bg-black opacity-60 cursor-pointer"
-      onClick={hideModal}
-    />
-  </div>
-)}
-
-
-
-
+    {modal && question && question.modals && modal in question.modals && (
+      <div className="fixed inset-0 z-10 flex items-center justify-center">
+        <div className="z-20 mx-auto max-w-xl space-y-5 rounded-lg border border-gray-300 bg-white p-6">
+          <h1 className="text-xl font-bold text-gray-800">
+            {toTitleCase(modal)}
+          </h1>
+          <p>{question.modals[modal]}</p>
+          <Button onClick={hideModal}>Done</Button>
+        </div>
+        <div
+          className="absolute inset-0 bg-black opacity-60 cursor-pointer"
+          onClick={hideModal}
+        />
+      </div>
+    )}
 
     {/* <div>
       <pre>question = {JSON.stringify(newquestions[index], null, 2)}</pre>
@@ -170,6 +171,8 @@ return (
     </div> */}
   </>
 );
+
+
 
 }
 
