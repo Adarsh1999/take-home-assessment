@@ -51,30 +51,27 @@ function App() {
 
   const save = async () => {
     if (Object.keys(data).length > 0) {
-      setStatus({ ...status, state: 'working' })
-      
+      setStatus({ ...status, state: 'working' });
+  
       const questionId = newquestions[index].id;
-      console.log("this is dat aaaaaaaaaaa", {
-
-        "answer": data[questionId],
-        "questionId": newquestions[index].id,
-        "fieldId": Object.keys(data[questionId])
-      });
+  
       try {
-        const response = await api.post('/answer/save',{
-          "answer": data[questionId],
-          "questionId": newquestions[index].id,
-          "fieldId": Object.keys(data[questionId])
+        const response = await api.post('/answer/save', {
+          answer: data[questionId],
+          questionId: newquestions[index].id,
+          fieldId: Object.keys(data[questionId]),
         });
-        setStatus({ state: 'saved', lastSaved: new Date() })
-        
-        
+  
+        // Check the response status here if needed
+  
+        setStatus({ state: 'saved', lastSaved: new Date() });
       } catch (error) {
+        setStatus({ state: 'error', lastSaved: new Date() });
         console.error(error);
       }
-      
     }
-  }
+  };
+  
 
   useDebounceEffect(save, [data], 1000)
   
