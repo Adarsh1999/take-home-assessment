@@ -64,7 +64,7 @@ Implementation Overview:
 - First of all I changed the questions.json and added list of fields
 - Updated 
 
-#### 4. Implement conditional Sequence:-
+#### 4. Unit testing:-
 
 - This was a interesting problem and I spend lots of time to design its schema but left it because of complex prisma schema and complex functionality in frontend
 - Though I know the sort of pseudo algo to implement it nut would like to discuss in the interview and will rather explain the backend repo readme rather than make this readme more longer by adding prisma schema and designing 
