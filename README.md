@@ -1,19 +1,7 @@
 # Atmos Take-Home Assessment
 
-Hello there! 👋
 
-Thanks for taking the time to complete this take-home assessment. We're excited to see what you come up with!
 
-We've provided a basic React app that you can use to get started. It's a simple question sequence that mimics the assessments in our app. We've also provided a starter Prisma schema, the ORM we use in our production codebase.
-
-![Example Image](/image.png)
-
-## 🏗 Architecture
-
-- An `App` component manages the application state and chooses which questions to render.
-- A `Question` component renders a question and a Field to answer it.
-- A `Field` component renders an input of a particular type. Currently supported are `boolean`, `text`, `number`, and `choice`.
-- The `questions.json` file contains the questions and answer option data.
 
 ## ⚙️ Setup
 
@@ -32,12 +20,12 @@ If you'd like, use the `.eslintrc.js` file to configure your editor to use the s
 
 **Frontend** _Next_, _within two hours_, please complete as many as possible of the following tasks. They aren't in any particular order, so feel free to tackle them in any order you like. They vary in difficulty, so don't feel like you have to do them all. _Please check off the specific tasks you choose to complete prior to submitting._
 
-- [ ] Animate the progress bar without adding new dependencies (using TailwindCSS is preferred).
-- [ ] Debounce the `save()` function in the App component to avoid unnecessary re-renders and API calls. (Avoid adding a new dependency if possible.)
-- [ ] Implement a `multiple` question type allowing multiple fields of varying types on one `Question` component.
-- [ ] Implement a conditional-sequence feature that sets the next question based on current responses. (Don't worry if you can't finish this one—we're interested in your thought process!)
-- [ ] Improve the project's test coverage. (Bonus points for fixing any bugs you find!)
-- [ ] Add a `PercentageField` component for inputting percentage values. Validate input (0-100) using Formik and Yup (optional).
+- [X] Animate the progress bar without adding new dependencies (using TailwindCSS is preferred).
+- [X] Debounce the `save()` function in the App component to avoid unnecessary re-renders and API calls. (Avoid adding a new dependency if possible.)
+- [X] Implement a `multiple` question type allowing multiple fields of varying types on one `Question` component.
+- [-] Implement a conditional-sequence feature that sets the next question based on current responses. (Don't worry if you can't finish this one—we're interested in your thought process!) --> Constructed logic though like through Prisma schema and might even implement it if had more time
+- [X] Improve the project's test coverage. (Bonus points for fixing any bugs you find!)
+- [X] Add a `PercentageField` component for inputting percentage values. Validate input (0-100) using Formik and Yup (optional).
 
 ## 📋 Evaluation Criteria
 

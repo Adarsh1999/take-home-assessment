@@ -41,7 +41,6 @@ Button.defaultProps = {
   variant: 'primary',
   className: '',
   disabled: false,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   onClick: () => { },
   children: undefined,
 }
