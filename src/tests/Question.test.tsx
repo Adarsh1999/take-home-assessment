@@ -1,7 +1,7 @@
-import { vi } from 'vitest'
+import { vi } from "vitest";
 
-import Question from '../components/Question'
-import { render, screen } from './testing-lib'
+import Question from "../components/Question";
+import { render, screen } from "./testing-lib";
 
 const question = {
   id: 1,
@@ -10,8 +10,10 @@ const question = {
   modals: {
     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt sint ex odio et consectetur ullam placeat ea in alias corporis quam, facilis fugiat ipsum, adipisci veritatis, quas natus ipsam nam repellat aliquid expedita. Accusamus non provident perspiciatis nostrum!',
   },
-  type: 'text',
+  fields: ['text', 'percentage'],
+  fields_id: [2, 1],
 }
+
 
 describe('Question', () => {
   it('renders the title of the question', () => {
@@ -34,4 +36,9 @@ describe('Question', () => {
     render(<Question question={question} onChange={vi.fn()} />)
     expect(screen.getByRole('textbox')).toBeInTheDocument()
   })
+  it('renders the description of the modal', () => {
+    render(<Question question={question} onChange={vi.fn()} />)
+    expect(screen.getByText(question.modals.description)).toBeInTheDocument()
+  })
 })
+

@@ -146,7 +146,7 @@ return (
             </Button>
           </div>
         </div>
-      </div>
+      </div>  
     </div>
 
     {modal && question && question.modals && modal in question.modals && (

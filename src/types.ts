@@ -24,6 +24,8 @@ export interface FieldProps {
   initialValue?: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   fieldId: number
+  onBlur?: () => void;
+
 }
 
 export const FieldDefaultProps = {
