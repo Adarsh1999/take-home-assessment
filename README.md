@@ -61,15 +61,14 @@ Implementation Overview:
 
 #### 3. Multiple Answer Fields:-
 
-- First of all I changed the questions.json and added list of fields
-- Updated 
+- Instead of creating a new whole new type I created a new edited the fields key in the json made it like this  `"fields": ["text", "percentage"]` consisting of an array now
 
-#### 4. Unit testing:-
+#### 4.Implement conditional Sequence:-
 
 - This was a interesting problem and I spend lots of time to design its schema but left it because of complex prisma schema and complex functionality in frontend
-- Though I know the sort of pseudo algo to implement it nut would like to discuss in the interview and will rather explain the backend repo readme rather than make this readme more longer by adding prisma schema and designing 
+- Though I know the sort of pseudo algo to implement i would like to discuss in the interview and will rather explain the backend repo readme rather than make this readme more longer by adding prisma schema and designing 
 
-#### 5. Implement conditional Sequence:-
+#### 5. Unite Testing:-
 
 - It was first time dealing with vittest, I wrote 21 testcases to cover 6 functionality or components
 - Components that I tested are : `Questiion Component`, `ProgressBar`, `PercentageField`, `ButtonField`, `BooleanField`, `NumberField`,  
