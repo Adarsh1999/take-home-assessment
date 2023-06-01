@@ -61,15 +61,14 @@ Implementation Overview:
 
 #### 3. Multiple Answer Fields:-
 
-- First of all I changed the questions.json and added list of fields
-- Updated 
+- Instead of creating a new whole new type I created a new edited the fields key in the json made it like this  `"fields": ["text", "percentage"]` consisting of an array now
 
-#### 4. Unit testing:-
+#### 4.Implement conditional Sequence:-
 
 - This was a interesting problem and I spend lots of time to design its schema but left it because of complex prisma schema and complex functionality in frontend
-- Though I know the sort of pseudo algo to implement it nut would like to discuss in the interview and will rather explain the backend repo readme rather than make this readme more longer by adding prisma schema and designing 
+- Though I know the sort of pseudo algo to implement i would like to discuss in the interview and will rather explain the backend repo readme rather than make this readme more longer by adding prisma schema and designing 
 
-#### 5. Implement conditional Sequence:-
+#### 5. Unite Testing:-
 
 - It was first time dealing with vittest, I wrote 21 testcases to cover 6 functionality or components
 - Components that I tested are : `Questiion Component`, `ProgressBar`, `PercentageField`, `ButtonField`, `BooleanField`, `NumberField`,  
@@ -85,6 +84,8 @@ Implementation Overview:
 - Improved UI components like when the description was long or there were lots of element on the page the items used to get squeezed up so made the positioning of all the elements dynamic with the width of the component varying according the length of the elements
 - Added commenting and made the code structure best industrial standards
 - Added some css to make UI more cleaner for buttons, links, added multiple answer field but tried to make the UI consistent
+   
+ **NOTE**: the reason why didn't have a get answer api implemented which could get the all answers or of a particular field just because if do that currenly I don't have User authentication so all answers will be already saved when you open the webapp, so the purpose of application may get defeated but I have a get all answers and get a particular answer of a particular question and field APIs in the backend
 
 
 ## 🎯 Tasks
