@@ -18,6 +18,7 @@ function ProgressBar({ current, max }: ProgressBarProps) {
         {/* Progress bar */}
         <div
           className="absolute top-0 left-0 h-full bg-primary-600"
+          data-testid="progress-bar-element"
           style={{
             width: valueAsPercentage,
             transition: 'width 0.5s ease-in-out',

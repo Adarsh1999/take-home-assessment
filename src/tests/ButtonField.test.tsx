@@ -11,7 +11,7 @@ describe('Button component', () => {
       const button = getByText('Click me');
   
       expect(button).toHaveClass('bg-primary-600');
-      expect(button).not.toHaveClass('disabled:bg-gray-300');
+      expect(button).toHaveClass('disabled:bg-gray-300');
     });
   
 

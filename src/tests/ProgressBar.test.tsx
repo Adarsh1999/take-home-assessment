@@ -10,9 +10,9 @@ describe('ProgressBar', () => {
     const { getByTestId, getByText } = render(
       <ProgressBar current={current} max={max} />
     );
-    const progressBar = getByTestId('progress-bar-container');
+    const progressBar = getByTestId('progress-bar-element');
     const valueText = "20%";
-
+ 
     expect(progressBar).toHaveStyle({
       width: valueText,
     });
